@@ -1,16 +1,3 @@
----
-description: |
-  The proxmox image Packer builder is able to create new images for use with
-  Proxmox VE. The builder takes a cloud-init enabled virtual machine
-  template name, runs any provisioning necessary on the image after
-  launching it, then creates a virtual machine template.
-page_title: Proxmox Clone - Builders
-sidebar_title: proxmox-clone
-nav_title: Clone
----
-
-# Proxmox Builder (from an image)
-
 Type: `proxmox-clone`
 Artifact BuilderId: `proxmox.clone`
 
@@ -33,11 +20,6 @@ There are many configuration options available for the builder. They are
 segmented below into two categories: required and optional parameters. Within
 each category, the available configuration keys are alphabetized.
 
-You may also want to take look at the general configuration references for
-[VirtIO RNG device](#virtio-rng-device)
-and [PCI Devices](#pci-devices)
-configuration references, which can be found further down the page.
-
 In addition to the options listed here, a
 [communicator](/packer/docs/templates/legacy_json_templates/communicator) can be configured for this
 builder.
@@ -54,7 +36,7 @@ in the image's Cloud-Init settings for provisioning.
 - `username` (string) - Username when authenticating to Proxmox, including
   the realm. For example `user@pve` to use the local Proxmox realm. When using
   token authentication, the username must include the token id after an exclamation
-  mark. For example, `user@pve!tokenid`.
+  mark. For example, `user@pve!tokenid`. 
   Can also be set via the `PROXMOX_USERNAME` environment variable.
 
 - `password` (string) - Password for the user.
@@ -233,14 +215,6 @@ or responding to pattern `/dev/.+`. Example:
     multiple disks are used. Requires `virtio-scsi-single` controller and a
     `scsi` or `virtio` disk. Defaults to `false`.
 
-  - `discard` (bool) - Relay TRIM commands to the underlying storage. Defaults
-    to false. See the
-    [Proxmox documentation](https://pve.proxmox.com/pve-docs/pve-admin-guide.html#qm_hard_disk_discard)
-    for for further information.
-
-  - `ssd` (bool) - Drive will be presented to the guest as solid-state drive
-    rather than a rotational disk.
-
 - `template_name` (string) - Name of the template. Defaults to the generated
   name used during creation.
 
@@ -274,7 +248,7 @@ or responding to pattern `/dev/.+`. Example:
 
 - `ipconfig` (array of objects) - Set IP address and gateway via Cloud-Init.
   If you have configured more than one network interface, make sure to match the order of
-  `network_adapters` and `ipconfig`.
+  `network_adapters` and `ipconfig`. 
 
   Usage example (JSON):
 
@@ -370,26 +344,6 @@ or responding to pattern `/dev/.+`. Example:
 
 - `machine` - (string) - Set the machine type. Supported values are 'pc' or 'q35'.
 
-### VirtIO RNG device
-
-@include 'builder/proxmox/common/rng0Config.mdx'
-
-#### Required:
-
-@include 'builder/proxmox/common/rng0Config-required.mdx'
-
-#### Optional:
-
-@include 'builder/proxmox/common/rng0Config-not-required.mdx'
-
-### PCI devices
-
-@include 'builder/proxmox/common/pciDeviceConfig.mdx'
-
-#### Optional:
-
-@include 'builder/proxmox/common/pciDeviceConfig-not-required.mdx'
-
 ## Example: Cloud-Init enabled Debian
 
 Here is a basic example creating a Debian 10 server image. This assumes
@@ -470,4 +424,3 @@ build {
   ]
 }
 ```
-
