@@ -3,7 +3,7 @@
 integration {
   name = "Proxmox"
   description = "The Proxmox Packer builder is able to create Proxmox virtual machines and store them as new Proxmox Virtual Machine images."
-  identifier = "packer/BrandonRomano/proxmox"
+  identifier = "packer/hashicorp/proxmox"
   component {
     type = "builder"
     name = "Proxmox Clone"
